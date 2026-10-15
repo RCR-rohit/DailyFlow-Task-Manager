@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DailyFlow — Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="DailyFlow home"><span class="brand-mark">✳</span><span>DailyFlow</span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav" aria-label="Task views">
+        <button class="nav-item active" data-view="all"><span>▦</span> All tasks <span class="nav-count" id="allCount">0</span></button>
+        <button class="nav-item" data-view="today"><span>◷</span> Today <span class="nav-count" id="todayCount">0</span></button>
+        <button class="nav-item" data-view="upcoming"><span>▤</span> Upcoming</button>
+        <button class="nav-item" data-view="completed"><span>✓</span> Completed</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="focus-card"><div class="focus-icon">✦</div><strong>Make room to focus.</strong><p>Small steps add up to big progress.</p></div>
+        <div class="profile"><div class="avatar">Y</div><div><strong>Your workspace</strong><small>Personal plan</small></div><span class="dots">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbView">All tasks</strong></div><div class="top-actions"><span class="today-date" id="headerDate"></span><button class="icon-button" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">◐</button></div></header>
+      <section class="page">
+        <div class="greeting"><div><p class="eyebrow" id="dayLabel">YOUR DAY AT A GLANCE</p><h1 id="pageTitle">All tasks<span class="title-dot">.</span></h1><p class="subtitle" id="pageSubtitle">A little progress each day adds up.</p></div><button class="primary-button" id="addTaskTop"><span>＋</span> Add task</button></div>
+
+        <section class="overview" aria-label="Daily overview">
+          <div class="overview-copy"><div class="overview-heading">Your daily progress <span class="spark">✦</span></div><p id="progressText">You’re just getting started. Pick one thing and begin.</p><div class="progress-track"><div id="progressBar"></div></div><div class="progress-foot"><span id="progressCount">0 of 0 tasks completed</span><strong id="progressPercent">0%</strong></div></div>
+          <div class="overview-art" aria-hidden="true"><div class="sun"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="art-star star-one">✦</div><div class="art-star star-two">✧</div></div>
+        </section>
+
+        <section class="task-section">
+          <div class="section-head"><div><h2 id="listTitle">Your tasks</h2><p id="listSubtitle">Keep your momentum going.</p></div><div class="list-controls"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks"></label><select id="sortSelect" aria-label="Sort tasks"><option value="created">Recently added</option><option value="due">Due date</option><option value="priority">Priority</option></select></div></div>
+          <div class="filters" id="priorityFilters"><button class="filter active" data-priority="all">All priorities</button><button class="filter" data-priority="high"><i class="priority-dot high"></i> High</button><button class="filter" data-priority="medium"><i class="priority-dot medium"></i> Medium</button><button class="filter" data-priority="low"><i class="priority-dot low"></i> Low</button></div>
+          <div class="task-list" id="taskList"></div>
+          <div class="empty-state" id="emptyState" hidden><div class="empty-illustration">✧</div><h3 id="emptyTitle">A fresh start.</h3><p id="emptyText">No tasks here yet. Add a task to get your day moving.</p><button class="primary-button" id="emptyAdd">＋ Add your first task</button></div>
+          <div class="list-footer" id="listFooter"><span id="footerCount">0 tasks</span><button id="clearCompleted">Clear completed</button></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog">
+    <form id="taskForm" method="dialog">
+      <div class="modal-head"><div><p class="eyebrow">MAKE IT HAPPEN</p><h2 id="dialogTitle">Create a task</h2></div><button type="button" class="close-button" id="closeDialog" aria-label="Close">×</button></div>
+      <label class="field-label" for="taskName">Task name</label><input class="field" id="taskName" name="title" placeholder="What do you need to do?" maxlength="120" required>
+      <label class="field-label" for="taskNotes">Notes <span class="optional">Optional</span></label><textarea class="field" id="taskNotes" name="notes" rows="3" placeholder="Add a few details..."></textarea>
+      <div class="field-row"><div class="field-group"><label class="field-label" for="taskDue">Due date</label><input class="field" id="taskDue" name="due" type="date"></div><div class="field-group"><label class="field-label" for="taskPriority">Priority</label><select class="field" id="taskPriority" name="priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancelDialog">Cancel</button><button class="primary-button" id="saveTask" type="submit">Create task</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
